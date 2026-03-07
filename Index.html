@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TBUCKS - Modern Educational Platform</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#06f9a8",
+                        "primary-dark": "#04c786",
+                        "accent": "#CBA258",
+                        "background-light": "#ffffff",
+                        "background-subtle": "#fafafa",
+                        "text-main": "#0d1c17",
+                        "text-muted": "#5c7068",
+                        "border-light": "#E5E5E5",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .hover-card-accent {
+            transition: all 0.3s ease;
+            border-top: 3px solid transparent;
+        }
+        .hover-card-accent:hover {
+            border-top-color: #06f9a8;
+            background-color: #FAFAFA;
+            transform: translateY(-2px);
+        }
+        .floating-icon {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="bg-background-light text-text-main font-display antialiased overflow-x-hidden">
+<!-- Navbar -->
+<nav class="border-b border-border-light bg-white sticky top-0 z-50">
+<div class="max-w-[1280px] mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-2 select-none">
+<div class="w-10 h-10 bg-text-main rounded-lg flex items-center justify-center text-accent">
+<span class="material-symbols-outlined text-[24px]">local_cafe</span>
+</div>
+<h1 class="text-xl font-extrabold tracking-tight">
+<span class="text-accent">T</span>BUCKS
+                </h1>
+</div>
+<div class="hidden md:flex items-center gap-10">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">What We Serve</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Archive</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Resources</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">About</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden sm:flex h-10 items-center justify-center px-6 text-sm font-bold text-text-main hover:bg-background-subtle rounded-lg transition-colors">
+                    Log In
+                </button>
+<button class="h-10 items-center justify-center px-6 bg-primary hover:bg-primary-dark text-text-main text-sm font-bold rounded-lg transition-colors shadow-soft">
+                    Get Started
+                </button>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<header class="relative w-full border-b border-border-light overflow-hidden bg-background-subtle">
+<div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(#0d1c17 1px, transparent 1px); background-size: 32px 32px;"></div>
+<div class="max-w-[1280px] mx-auto px-6 py-24 md:py-32 grid md:grid-cols-2 gap-12 items-center relative z-10">
+<div class="flex flex-col gap-6 md:pr-12">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-white border border-border-light rounded-full w-fit">
+<span class="w-2 h-2 rounded-full bg-accent"></span>
+<span class="text-xs font-semibold uppercase tracking-wider text-text-muted">Education Evolved</span>
+</div>
+<h2 class="text-5xl md:text-6xl font-black leading-[1.1] tracking-tight">
+                    Fueling Teachers,<br/>
+                    One <span class="text-accent inline-block relative">
+                        T-Buck
+                        <svg class="absolute w-full h-3 -bottom-1 left-0 text-primary opacity-40" preserveaspectratio="none" viewbox="0 0 100 10">
+<path d="M0 5 Q 50 10 100 5" fill="none" stroke="currentColor" stroke-width="8"></path>
+</svg>
+</span> at a Time
+                </h2>
+<p class="text-lg text-text-muted leading-relaxed max-w-lg">
+                    A modern educational platform designed to support educators with resources and rewards. Join the TBUCKS community today and start brewing success.
+                </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="h-12 px-8 bg-text-main text-white hover:bg-black font-bold rounded-lg transition-all transform hover:-translate-y-1 shadow-soft">
+                        Join Now
+                    </button>
+<button class="h-12 px-8 bg-white border border-border-light text-text-main hover:border-primary font-bold rounded-lg transition-all">
+                        Learn More
+                    </button>
+</div>
+<div class="flex items-center gap-4 mt-8 pt-8 border-t border-border-light/60">
+<div class="flex -space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-white bg-gray-200" data-alt="User avatar 1" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCiDRrDhzVPHtGKz-fCsaffIyvlB8epZluJY4qnI5zANfdOw-Ite4Ab_ATp2q5IC0NpbhCoTOMbfT1YFe7jLdbAu7X7LZ3uvdcocexyGMEmniEqGEDMeqmGuHQ-DqiE8KAbiWU_lRfPSQz7vsQ_pkrOlGERxttHUOfFyVXXIxFThhjhxGNlROGKovkOeom8akmgZavMg2Sf1II33BGhIbm9k4BoGqvY_DLX03dX17Y4kddbtVaT4MNfpDnVe4qrmV_yCorZ1M4Ekn4'); background-size: cover;"></div>
+<div class="w-10 h-10 rounded-full border-2 border-white bg-gray-300" data-alt="User avatar 2" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD_bGOcSNoijshwh50vbt_fphum1chlpHjWisgHn6vY6cMqryj7xcrEtRXbBC8j22MQRnYRzEu7o6Xl4Fjr32c4qZIdF6BJKTQKJuDvny2O0su3iZBkwNXCEhO62wUqa5XO2LcbKDPLwMXlRcUnqFoIzFdfHdwiBkhO56N6OydCTz8j8k5ZbbZIrKkVyJA_2OgKAf3Qtf0MCBSOIBF2Lf111LmrxjZ0QtedYJw7hfwdBeUz2NoVVdOTyQlxfe2nikYqDg8ZKbW1Hoo'); background-size: cover;"></div>
+<div class="w-10 h-10 rounded-full border-2 border-white bg-gray-400" data-alt="User avatar 3" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCvSBVde0gnKxzIeTT2YgD79fNPzjGeWENaeTL6PH7D3UxonlsS4Vv5bsRJsX0bVKvP0VpKfoOmfNFqQbqb6J0KksT--tnEJ8eFUF5NLiAWL89ZvxugZPIW2YMF1M3rj7CfG0yV3B9CmOe5eav-5c7LjefX43o5gGqAKjubtXbD6ZR0Kh_QDr11X9_nr7_8p6ouaIDXPiWj-U1t7mxMmbJ6Oe1UAZKkHHuqiXA7NLygy8tzUQF3LXeFw-5JiSvme62Ug9BnZMXZmkQ'); background-size: cover;"></div>
+<div class="w-10 h-10 rounded-full border-2 border-white bg-primary text-text-main flex items-center justify-center text-xs font-bold shadow-sm">
+                            +2k
+                        </div>
+</div>
+<span class="text-sm font-medium text-text-muted">Trusted by educators worldwide</span>
+</div>
+</div>
+<div class="relative h-full flex justify-center items-center min-h-[400px]">
+<!-- Abstract graphic background -->
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent/10 rounded-2xl -rotate-3 transform scale-95"></div>
+<div class="absolute inset-0 bg-white border border-border-light rounded-2xl rotate-3 shadow-lg transform scale-95"></div>
+<!-- Floating Cup Icon -->
+<div class="relative z-10 floating-icon">
+<div class="w-48 h-48 md:w-64 md:h-64 bg-text-main rounded-3xl flex items-center justify-center shadow-2xl rotate-6 border-[6px] border-white">
+<div class="text-center">
+<span class="material-symbols-outlined text-[80px] md:text-[100px] text-white mb-2">local_cafe</span>
+<div class="text-accent text-4xl font-black">T</div>
+</div>
+<!-- Steam animation effect suggestion static -->
+<div class="absolute -top-12 left-1/2 -translate-x-1/2 flex gap-3 opacity-60">
+<div class="w-2 h-8 bg-gray-300 rounded-full blur-sm"></div>
+<div class="w-2 h-12 bg-gray-300 rounded-full blur-sm -mt-4"></div>
+<div class="w-2 h-6 bg-gray-300 rounded-full blur-sm"></div>
+</div>
+</div>
+<!-- Decorative Elements -->
+<div class="absolute -right-8 -bottom-8 bg-white p-4 rounded-xl shadow-lg border border-border-light flex items-center gap-3 animate-bounce" style="animation-duration: 3s;">
+<div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+<span class="material-symbols-outlined">verified</span>
+</div>
+<div>
+<p class="text-xs text-text-muted font-semibold">Status</p>
+<p class="text-sm font-bold text-text-main">Verified Teacher</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Services Section -->
+<section class="border-b border-border-light bg-white py-20">
+<div class="max-w-[1280px] mx-auto px-6">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+<div class="max-w-2xl">
+<h2 class="text-sm font-bold text-accent uppercase tracking-wider mb-2">Our Menu</h2>
+<h3 class="text-3xl md:text-4xl font-bold text-text-main tracking-tight">Brewing Success for Educators</h3>
+<p class="mt-4 text-text-muted text-lg max-w-xl">
+                        Our platform provides the essential ingredients for a thriving classroom environment, served fresh daily.
+                    </p>
+</div>
+<a class="group flex items-center gap-2 text-sm font-bold text-text-main hover:text-primary transition-colors" href="#">
+                    View Full Menu
+                    <span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="hover-card-accent p-8 rounded-xl border border-border-light bg-white group cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[120px] text-text-main">menu_book</span>
+</div>
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary-dark mb-6 group-hover:bg-primary group-hover:text-text-main transition-colors">
+<span class="material-symbols-outlined">menu_book</span>
+</div>
+<h4 class="text-xl font-bold text-text-main mb-3">Fresh Resources</h4>
+<p class="text-text-muted leading-relaxed">
+                        Access a constantly updated library of teaching materials curated by top educators.
+                    </p>
+</div>
+<!-- Card 2 -->
+<div class="hover-card-accent p-8 rounded-xl border border-border-light bg-white group cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[120px] text-text-main">groups</span>
+</div>
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary-dark mb-6 group-hover:bg-primary group-hover:text-text-main transition-colors">
+<span class="material-symbols-outlined">groups</span>
+</div>
+<h4 class="text-xl font-bold text-text-main mb-3">Community Blend</h4>
+<p class="text-text-muted leading-relaxed">
+                        Connect with other educators in a relaxed, supportive network designed for collaboration.
+                    </p>
+</div>
+<!-- Card 3 -->
+<div class="hover-card-accent p-8 rounded-xl border border-border-light bg-white group cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[120px] text-text-main">local_cafe</span>
+</div>
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary-dark mb-6 group-hover:bg-primary group-hover:text-text-main transition-colors">
+<span class="material-symbols-outlined">local_cafe</span>
+</div>
+<h4 class="text-xl font-bold text-text-main mb-3">Reward Perks</h4>
+<p class="text-text-muted leading-relaxed">
+                        Earn T-Bucks for contributions and redeem them for real value in our exclusive marketplace.
+                    </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Archive Section -->
+<section class="py-20 bg-background-subtle">
+<div class="max-w-[1280px] mx-auto px-6">
+<div class="flex items-center justify-between mb-10 border-b border-border-light pb-4">
+<h3 class="text-2xl font-bold text-text-main">From the Archive</h3>
+<div class="flex gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-full border border-border-light bg-white hover:bg-gray-50 transition-colors">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full border border-border-light bg-white hover:bg-gray-50 transition-colors">
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Article 1 -->
+<article class="group bg-white rounded-lg overflow-hidden border border-border-light hover:shadow-lg transition-all duration-300">
+<div class="h-48 overflow-hidden relative">
+<div class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2 py-1 rounded text-xs font-bold z-10">Math</div>
+<div class="w-full h-full bg-gray-200 transition-transform duration-500 group-hover:scale-105" data-alt="Abstract mathematics shapes" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBC4KjQTrUX7ZczmaJYFfa9-5tIzwCWLkv3113MQ9ZPLvuXFlKqVZVwSN08A9qUgnh5iuqa91-x_yMbEXC4UMbHCK3yFbiiGSSOZlg6XiMPXGqR4GqUUADj94PFkgVHmoh1f3xH94nr34cHGp5GF5MGhFywXKgrSSf-hnd1OVX5YaDFTKtX6QL70JAixSwLW9xUAudzS4xVRXKFmTf2Gj3XvrvzLpNP-8aZ7GqSfLhPcRVAK2t8FLoXalYGDOu_wrgGfTezsOXe6dY'); background-size: cover; background-position: center;"></div>
+</div>
+<div class="p-5">
+<div class="flex items-center gap-2 text-xs text-text-muted mb-2">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>Oct 24, 2023</span>
+</div>
+<h4 class="text-lg font-bold text-text-main mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                            The Geometry of Coffee Cups
+                        </h4>
+<p class="text-sm text-text-muted line-clamp-3 mb-4">
+                            Exploring shapes and volumes in everyday objects to engage students in geometry lessons.
+                        </p>
+<a class="text-sm font-bold text-accent hover:underline decoration-2 underline-offset-4" href="#">Read Article</a>
+</div>
+</article>
+<!-- Article 2 -->
+<article class="group bg-white rounded-lg overflow-hidden border border-border-light hover:shadow-lg transition-all duration-300">
+<div class="h-48 overflow-hidden relative">
+<div class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2 py-1 rounded text-xs font-bold z-10">Science</div>
+<div class="w-full h-full bg-gray-200 transition-transform duration-500 group-hover:scale-105" data-alt="Microscope lens close up" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB1IILokzqhptYcXpw7flxmR-T6K1_lhbrCdtAP4I6CoFaAsNArkCTvoYvrRrSKKerSFg158Gx2duGBlPDJrSgciP6ZA4NHHfUFB_7kAIG11WQWKH7CRNfNS9BlhdamSXtUhrZFO429K846iUmudoCSYSblGrUoIdB6D4ngYOu-Ot9adfbBE2MVNKUF-Ku9JQLko-QG5bOnbJ3a_GKevKgOnXeyMBfFVg6NqDk7AIlQhuVsvC_jQTm5oXKSLfwWpzNIht8U1GD8fD0'); background-size: cover; background-position: center;"></div>
+</div>
+<div class="p-5">
+<div class="flex items-center gap-2 text-xs text-text-muted mb-2">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>Nov 02, 2023</span>
+</div>
+<h4 class="text-lg font-bold text-text-main mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                            Photosynthesis &amp; Morning Brews
+                        </h4>
+<p class="text-sm text-text-muted line-clamp-3 mb-4">
+                            How plants process energy and how we can relate that to our daily caffeine intake.
+                        </p>
+<a class="text-sm font-bold text-accent hover:underline decoration-2 underline-offset-4" href="#">Read Article</a>
+</div>
+</article>
+<!-- Article 3 -->
+<article class="group bg-white rounded-lg overflow-hidden border border-border-light hover:shadow-lg transition-all duration-300">
+<div class="h-48 overflow-hidden relative">
+<div class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2 py-1 rounded text-xs font-bold z-10">History</div>
+<div class="w-full h-full bg-gray-200 transition-transform duration-500 group-hover:scale-105" data-alt="Ancient scroll texture" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCIVf3mvGMiPURyRgSx0rnckAw_VYAirrQQGcREye7HaWlC5eq2n8oJ6x8DuNXP6kojwVInfIuLWS9W9TnXDKHoY6H3Yj4xFIOwYOX3HPEWsCQYgVHtHWl-2_PmbuyIofUhnRqu3QdcyOgh82DEPaYNbcEy3wnTZYdepZeDRsjSfGfqPRUq7QIZPn3x6_-G6QGZzwvjxG4wdcMHaTpP7h_T4Pwzzsp6ux7v3_T_O27e724en1yOh9bj2a-brpDOKQKeXoJagWmIwOE'); background-size: cover; background-position: center;"></div>
+</div>
+<div class="p-5">
+<div class="flex items-center gap-2 text-xs text-text-muted mb-2">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>Nov 15, 2023</span>
+</div>
+<h4 class="text-lg font-bold text-text-main mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                            The History of Trade Routes
+                        </h4>
+<p class="text-sm text-text-muted line-clamp-3 mb-4">
+                            Tracing the origins of spice and coffee trade to teach economic history effectively.
+                        </p>
+<a class="text-sm font-bold text-accent hover:underline decoration-2 underline-offset-4" href="#">Read Article</a>
+</div>
+</article>
+<!-- Article 4 -->
+<article class="group bg-white rounded-lg overflow-hidden border border-border-light hover:shadow-lg transition-all duration-300">
+<div class="h-48 overflow-hidden relative">
+<div class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2 py-1 rounded text-xs font-bold z-10">Wellness</div>
+<div class="w-full h-full bg-gray-200 transition-transform duration-500 group-hover:scale-105" data-alt="Serene nature landscape" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBBfFIfPRlvG9k8vTWCuJ0Av2TCi2L2CXY3whVKuIhRjVzQPRXd2hTGWAH9bOnciXEl7e_clA0k28Pw6uKsKSJM4u_efCkCkeNH2lw5wmnESlYaJ45PDuLu_tHZGMTnZdt_k1knGNorvlIEzx_1g4jf-DHZeMKN44MGdLuNWRJmez5dLUF3BQj9NglltT6NF020jxpi0n2tN3w_WClazBj9-VXAUAZ-IxLI5HUPAJ14mjdS3QRIo-VIW34dEO9p4wAB396c0UxWOBM'); background-size: cover; background-position: center;"></div>
+</div>
+<div class="p-5">
+<div class="flex items-center gap-2 text-xs text-text-muted mb-2">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>Nov 28, 2023</span>
+</div>
+<h4 class="text-lg font-bold text-text-main mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                            Teacher Burnout Prevention
+                        </h4>
+<p class="text-sm text-text-muted line-clamp-3 mb-4">
+                            Strategies to keep your energy high and stress levels low throughout the semester.
+                        </p>
+<a class="text-sm font-bold text-accent hover:underline decoration-2 underline-offset-4" href="#">Read Article</a>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-white border-t border-border-light pt-16 pb-8">
+<div class="max-w-[1280px] mx-auto px-6">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 mb-6">
+<div class="w-8 h-8 bg-text-main rounded-md flex items-center justify-center text-accent">
+<span class="material-symbols-outlined text-[18px]">local_cafe</span>
+</div>
+<h2 class="text-lg font-extrabold tracking-tight">
+<span class="text-accent">T</span>BUCKS
+                        </h2>
+</div>
+<p class="text-text-muted text-sm leading-relaxed mb-6">
+                        Empowering educators with resources, community, and rewards. Because teaching should be rewarding.
+                    </p>
+<div class="flex gap-4">
+<a class="text-text-muted hover:text-text-main transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="text-text-muted hover:text-text-main transition-colors" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+<a class="text-text-muted hover:text-text-main transition-colors" href="#"><span class="material-symbols-outlined">rss_feed</span></a>
+</div>
+</div>
+<div>
+<h3 class="font-bold text-text-main mb-6">Platform</h3>
+<ul class="flex flex-col gap-3 text-sm text-text-muted">
+<li><a class="hover:text-primary transition-colors" href="#">Browse Resources</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Community Hub</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Reward Store</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Pricing</a></li>
+</ul>
+</div>
+<div>
+<h3 class="font-bold text-text-main mb-6">Company</h3>
+<ul class="flex flex-col gap-3 text-sm text-text-muted">
+<li><a class="hover:text-primary transition-colors" href="#">About Us</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Press</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Contact</a></li>
+</ul>
+</div>
+<div>
+<h3 class="font-bold text-text-main mb-6">Stay Updated</h3>
+<p class="text-sm text-text-muted mb-4">Subscribe to our newsletter for the latest resources.</p>
+<form class="flex flex-col gap-2">
+<input class="h-10 px-4 rounded-lg bg-background-subtle border border-border-light focus:outline-none focus:border-primary text-sm w-full" placeholder="Enter your email" type="email"/>
+<button class="h-10 px-4 bg-text-main text-white font-bold rounded-lg text-sm hover:bg-black transition-colors" type="button">Subscribe</button>
+</form>
+</div>
+</div>
+<div class="border-t border-border-light pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-text-muted">
+<p>© 2023 TBUCKS Education Inc. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="hover:text-text-main" href="#">Privacy Policy</a>
+<a class="hover:text-text-main" href="#">Terms of Service</a>
+<a class="hover:text-text-main" href="#">Cookie Settings</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
