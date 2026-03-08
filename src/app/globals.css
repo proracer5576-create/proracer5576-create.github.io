@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #06f9a8;
+  --color-primary-dark: #04c786;
+  --color-accent: #CBA258;
+  --color-background-light: #ffffff;
+  --color-background-subtle: #f0fdf4; /* 옅은 초록빛이 도는 쿨 그레이/그린 */
+  --color-text-main: #0d1c17;
+  --color-text-muted: #5c7068;
+  --color-border-light: #E5E5E5;
+  --color-brand-t: #CBA258; /* 골드 */
+  --color-brand-bucks: #006241; /* 딥그린 */
+  
+  --font-display: 'Manrope', sans-serif;
+}
+
+@layer utilities {
+  .shadow-soft {
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+  }
+}
+
+body {
+  background-color: var(--color-background-light);
+  color: var(--color-text-main);
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+}
+
+.hover-card-accent {
+  transition: all 0.3s ease;
+  border-top: 3px solid transparent;
+}
+.hover-card-accent:hover {
+  border-top-color: var(--color-primary);
+  background-color: var(--color-background-subtle);
+  transform: translateY(-2px);
+}
+.floating-icon {
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
