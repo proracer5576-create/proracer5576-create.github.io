@@ -1,372 +1,957 @@
 <!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TBUCKS — 선생님들의 편안한 디지털 아지트</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #006241;
+      --green-light: #00754A;
+      --gold: #CBA258;
+      --house: #1E3932;
+      --white: #FFFFFF;
+      --bg: #FAFAFA;
+      --text: #1D1D1D;
+      --text-sub: #6B6B6B;
+      --text-light: #ABABAB;
+      --border: #E5E5E5;
+    }
 
-<html lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>TBUCKS - Modern Educational Platform</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#06f9a8",
-                        "primary-dark": "#04c786",
-                        "accent": "#CBA258",
-                        "background-light": "#ffffff",
-                        "background-subtle": "#fafafa",
-                        "text-main": "#0d1c17",
-                        "text-muted": "#5c7068",
-                        "border-light": "#E5E5E5",
-                    },
-                    fontFamily: {
-                        "display": ["Manrope", "sans-serif"]
-                    },
-                    boxShadow: {
-                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
-                    }
-                },
-            },
-        }
-    </script>
-<style>
-        .hover-card-accent {
-            transition: all 0.3s ease;
-            border-top: 3px solid transparent;
-        }
-        .hover-card-accent:hover {
-            border-top-color: #06f9a8;
-            background-color: #FAFAFA;
-            transform: translateY(-2px);
-        }
-        .floating-icon {
-            animation: float 6s ease-in-out infinite;
-        }
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-    </style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--text);
+      font-family: 'Sora', 'Noto Sans KR', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 60px;
+      padding: 0 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .nav-logo svg { height: 32px; width: 32px; }
+
+    .nav-wordmark {
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2.2rem;
+      align-items: center;
+      height: 100%;
+    }
+
+    nav ul > li {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    nav ul > li > a {
+      color: var(--text-sub);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    nav ul > li > a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--green);
+      transform: scaleX(0);
+      transition: transform 0.2s;
+    }
+
+    nav ul > li > a:hover { color: var(--green); }
+    nav ul > li > a:hover::after { transform: scaleX(1); }
+    nav ul > li > a.nav-active { color: var(--green); }
+    nav ul > li > a.nav-active::after { transform: scaleX(1); }
+
+    /* Dropdown */
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .nav-dropdown > a .arrow {
+      display: inline-block;
+      width: 4px; height: 4px;
+      border-right: 1.2px solid var(--text-sub);
+      border-bottom: 1.2px solid var(--text-sub);
+      transform: rotate(45deg);
+      margin-left: 0.35rem;
+      margin-top: -2px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .nav-dropdown:hover > a .arrow {
+      border-color: var(--green);
+      transform: rotate(-135deg);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--green);
+      border-radius: 0 0 8px 8px;
+      padding: 0.5rem 0;
+      min-width: 180px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s, visibility 0.2s;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 0.6rem 1.2rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-sub);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.15s, background 0.15s;
+      white-space: nowrap;
+      height: auto;
+      position: static;
+    }
+
+    .dropdown-menu a::after { display: none !important; }
+
+    .dropdown-menu a:hover {
+      color: var(--green);
+      background: var(--bg);
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 8rem 2rem 6rem;
+    }
+
+    .hero-logo {
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.6s ease-out both;
+    }
+
+    .hero-logo svg { width: 80px; height: 80px; }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text);
+      animation: fadeUp 0.6s ease-out 0.08s both;
+    }
+
+    .hero-line {
+      width: 40px;
+      height: 2px;
+      background: var(--green);
+      margin: 1.5rem auto;
+      animation: fadeUp 0.6s ease-out 0.16s both;
+    }
+
+    .hero-tagline {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: 400;
+      color: var(--text);
+      animation: fadeUp 0.6s ease-out 0.24s both;
+    }
+
+    .hero-desc {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--text-sub);
+      margin-top: 0.8rem;
+      max-width: 360px;
+      line-height: 1.8;
+      animation: fadeUp 0.6s ease-out 0.32s both;
+    }
+
+    .hero-pills {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 2.5rem;
+      animation: fadeUp 0.6s ease-out 0.4s both;
+    }
+
+    .pill {
+      font-size: 0.68rem;
+      font-weight: 500;
+      padding: 0.4rem 0.9rem;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      color: var(--text-sub);
+      letter-spacing: 0.04em;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .pill:hover { border-color: var(--green); color: var(--green); }
+
+    .hero-cta {
+      margin-top: 2.5rem;
+      animation: fadeUp 0.6s ease-out 0.48s both;
+    }
+
+    .btn {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.75rem 2rem;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      letter-spacing: 0.06em;
+      display: inline-block;
+    }
+
+    .btn--green {
+      background: var(--green);
+      color: var(--white);
+      border: none;
+    }
+
+    .btn--green:hover {
+      background: var(--house);
+      transform: translateY(-1px);
+    }
+
+    .btn--outline {
+      background: none;
+      color: var(--green);
+      border: 1.5px solid var(--green);
+    }
+
+    .btn--outline:hover {
+      background: var(--green);
+      color: var(--white);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTION ── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      padding: 5rem 0;
+    }
+
+    .section-label {
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--green);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-desc {
+      color: var(--text-sub);
+      font-weight: 300;
+      font-size: 0.88rem;
+      margin-bottom: 3rem;
+      line-height: 1.7;
+    }
+
+    .section-border {
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── MENU ── */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+    }
+
+    .menu-card {
+      padding: 2rem;
+      border: 1px solid var(--border);
+      margin: -0.5px;
+      transition: background 0.2s;
+      cursor: default;
+      position: relative;
+    }
+
+    .menu-card::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: -1px;
+      right: -1px;
+      height: 3px;
+      background: var(--green);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .menu-card:hover::before { opacity: 1; }
+    .menu-card:hover { background: var(--bg); }
+
+    .menu-card h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .menu-card p {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ── PROJECTS ── */
+    .project-list { display: flex; flex-direction: column; }
+
+    .project-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: padding-left 0.2s;
+      position: relative;
+    }
+
+    .project-card:first-child { border-top: 1px solid var(--border); }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 0; bottom: 0;
+      width: 3px;
+      background: var(--green);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .project-card:hover { padding-left: 1rem; }
+    .project-card:hover::before { opacity: 1; }
+    .project-card:hover .project-name { color: var(--green); }
+
+    .project-name {
+      font-size: 0.92rem;
+      font-weight: 600;
+      transition: color 0.2s;
+      margin-bottom: 0.15rem;
+    }
+
+    .project-desc { font-size: 0.78rem; color: var(--text-sub); font-weight: 300; }
+
+    .project-badge {
+      font-size: 0.6rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.25rem 0.7rem;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .badge--live { color: var(--green); border: 1px solid var(--green); }
+    .badge--wip { color: var(--gold); border: 1px solid var(--gold); }
+    .badge--soon { color: var(--text-light); border: 1px solid var(--border); }
+
+    /* ── TRENDING ── */
+    .trending-list { display: flex; flex-direction: column; }
+
+    .trending-item {
+      display: grid;
+      grid-template-columns: 28px 1fr auto;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: padding-left 0.2s;
+      position: relative;
+    }
+
+    .trending-item:first-child { border-top: 1px solid var(--border); }
+
+    .trending-item::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 0; bottom: 0;
+      width: 3px;
+      background: var(--green);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .trending-item:hover { padding-left: 1rem; }
+    .trending-item:hover::before { opacity: 1; }
+    .trending-item:hover .trending-title { color: var(--green); }
+
+    .trending-num {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--green);
+    }
+
+    .trending-title {
+      font-size: 0.9rem;
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+
+    .trending-cat {
+      font-size: 0.58rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 3px;
+      color: var(--text-sub);
+      border: 1px solid var(--border);
+    }
+
+    /* ── ARCHIVE ── */
+    .archive-list { display: flex; flex-direction: column; }
+
+    .archive-item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: padding-left 0.2s;
+      position: relative;
+    }
+
+    .archive-item:first-child { border-top: 1px solid var(--border); }
+
+    .archive-item::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 0; bottom: 0;
+      width: 3px;
+      background: var(--green);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .archive-item:hover { padding-left: 1rem; }
+    .archive-item:hover::before { opacity: 1; }
+    .archive-item:hover .archive-title { color: var(--green); }
+
+    .archive-date { font-size: 0.7rem; color: var(--text-light); font-weight: 400; }
+    .archive-title { font-size: 0.88rem; font-weight: 400; transition: color 0.2s; }
+
+    .archive-tag {
+      font-size: 0.58rem;
+      font-weight: 600;
+      color: var(--text-sub);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.55rem;
+      border-radius: 3px;
+    }
+
+    /* ── LINKS ── */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .link-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 2rem 1rem;
+      border: 1px solid var(--border);
+      margin: -0.5px;
+      text-decoration: none;
+      color: var(--text);
+      text-align: center;
+      transition: background 0.2s;
+      position: relative;
+    }
+
+    .link-card::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: -1px; right: -1px;
+      height: 3px;
+      background: var(--green);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .link-card:hover { background: var(--bg); }
+    .link-card:hover::after { opacity: 1; }
+
+    .link-emoji { font-size: 1.4rem; }
+    .link-name { font-weight: 600; font-size: 0.82rem; }
+    .link-handle { font-size: 0.68rem; color: var(--text-light); font-weight: 300; }
+
+    /* ── CTA ── */
+    .cta-section {
+      text-align: center;
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .cta-line {
+      width: 40px;
+      height: 2px;
+      background: var(--green);
+      margin: 0 auto 1.5rem;
+    }
+
+    .cta-section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 0.6rem;
+    }
+
+    .cta-section p {
+      color: var(--text-sub);
+      font-weight: 300;
+      font-size: 0.88rem;
+      margin-bottom: 2rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    footer p { font-size: 0.68rem; color: var(--text-light); letter-spacing: 0.06em; }
+    footer .brand { color: var(--green); font-weight: 600; }
+
+    /* ── ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 1.5rem; }
+      nav ul { display: none; }
+      .mobile-toggle { display: block; }
+
+      nav ul.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: var(--white);
+        padding: 1rem 1.5rem;
+        gap: 0.6rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      nav ul.open .dropdown-menu {
+        position: static;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        box-shadow: none;
+        border: none;
+        border-top: none;
+        border-left: 2px solid var(--green);
+        border-radius: 0;
+        padding: 0.3rem 0 0.3rem 0.8rem;
+        margin-top: 0.3rem;
+        min-width: auto;
+      }
+
+      .container { padding: 0 1.5rem; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .links-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .project-card { grid-template-columns: 1fr auto; }
+      .project-card::before, .trending-item::before, .archive-item::before {
+        left: -1.5rem;
+      }
+
+      .trending-item { grid-template-columns: 24px 1fr auto; gap: 0.8rem; }
+
+      .archive-item { grid-template-columns: 1fr; gap: 0.2rem; }
+      .archive-date { order: 1; }
+      .archive-title { order: 0; }
+      .archive-tag { justify-self: start; order: 2; }
+
+      .hero-logo svg { width: 64px; height: 64px; }
+    }
+
+    @media (max-width: 480px) {
+      .links-grid { grid-template-columns: 1fr 1fr; }
+      .trending-item { grid-template-columns: 1fr auto; }
+      .trending-num { display: none; }
+    }
+  </style>
 </head>
-<body class="bg-background-light text-text-main font-display antialiased overflow-x-hidden">
-<!-- Navbar -->
-<nav class="border-b border-border-light bg-white sticky top-0 z-50">
-<div class="max-w-[1280px] mx-auto px-6 h-20 flex items-center justify-between">
-<div class="flex items-center gap-2 select-none">
-<div class="w-10 h-10 bg-text-main rounded-lg flex items-center justify-center text-accent">
-<span class="material-symbols-outlined text-[24px]">local_cafe</span>
-</div>
-<h1 class="text-xl font-extrabold tracking-tight">
-<span class="text-accent">T</span>BUCKS
-                </h1>
-</div>
-<div class="hidden md:flex items-center gap-10">
-<a class="text-sm font-medium hover:text-primary transition-colors" href="#">What We Serve</a>
-<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Archive</a>
-<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Resources</a>
-<a class="text-sm font-medium hover:text-primary transition-colors" href="#">About</a>
-</div>
-<div class="flex items-center gap-4">
-<button class="hidden sm:flex h-10 items-center justify-center px-6 text-sm font-bold text-text-main hover:bg-background-subtle rounded-lg transition-colors">
-                    Log In
-                </button>
-<button class="h-10 items-center justify-center px-6 bg-primary hover:bg-primary-dark text-text-main text-sm font-bold rounded-lg transition-colors shadow-soft">
-                    Get Started
-                </button>
-</div>
-</div>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="47" stroke="#006241" stroke-width="2.5" fill="none"/>
+      <circle cx="50" cy="50" r="40" stroke="#006241" stroke-width="1" fill="none" opacity="0.25"/>
+      <path d="M36 40 h28 l-3 26 a3 3 0 0 1-3 2.8 h-16 a3 3 0 0 1-3-2.8 Z" stroke="#006241" stroke-width="2" fill="none"/>
+      <path d="M64 46 c7 0 9 4 9 9 s-2 9 -9 9" stroke="#006241" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <path d="M44 36 c0-4 4-4 4-8" stroke="#006241" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.5"/>
+      <path d="M50 35 c0-4 4-4 4-8" stroke="#006241" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.5"/>
+      <path d="M56 36 c0-4 4-4 4-8" stroke="#006241" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.5"/>
+      <text x="50" y="60" text-anchor="middle" font-family="'DM Serif Display',serif" font-size="16" fill="#006241" font-weight="400">T</text>
+    </svg>
+    <span class="nav-wordmark">TBUCKS</span>
+  </a>
+  <button class="mobile-toggle" onclick="document.querySelector('nav ul').classList.toggle('open')">☰</button>
+  <ul>
+    <li><a href="#menu">소개</a></li>
+    <li class="nav-dropdown">
+      <a href="#projects">프로젝트 <span class="arrow"></span></a>
+      <div class="dropdown-menu">
+        <a href="https://script.google.com/macros/s/AKfycbxrxOBnlO4j2ee01OHPLS0tHPP50JUieJEjH_og58Kenkmc11nhR1xj2L_g3s44XyPn/exec">생활지도 누가기록</a>
+        <a href="https://edu-v6-six.vercel.app/">원격 연수원</a>
+      </div>
+    </li>
+    <li><a href="#trending">트렌드</a></li>
+    <li><a href="#archive">아카이브</a></li>
+    <li><a href="#links">연결</a></li>
+  </ul>
 </nav>
-<!-- Hero Section -->
-<header class="relative w-full border-b border-border-light overflow-hidden bg-background-subtle">
-<div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(#0d1c17 1px, transparent 1px); background-size: 32px 32px;"></div>
-<div class="max-w-[1280px] mx-auto px-6 py-24 md:py-32 grid md:grid-cols-2 gap-12 items-center relative z-10">
-<div class="flex flex-col gap-6 md:pr-12">
-<div class="inline-flex items-center gap-2 px-3 py-1 bg-white border border-border-light rounded-full w-fit">
-<span class="w-2 h-2 rounded-full bg-accent"></span>
-<span class="text-xs font-semibold uppercase tracking-wider text-text-muted">Education Evolved</span>
-</div>
-<h2 class="text-5xl md:text-6xl font-black leading-[1.1] tracking-tight">
-                    Fueling Teachers,<br/>
-                    One <span class="text-accent inline-block relative">
-                        T-Buck
-                        <svg class="absolute w-full h-3 -bottom-1 left-0 text-primary opacity-40" preserveaspectratio="none" viewbox="0 0 100 10">
-<path d="M0 5 Q 50 10 100 5" fill="none" stroke="currentColor" stroke-width="8"></path>
-</svg>
-</span> at a Time
-                </h2>
-<p class="text-lg text-text-muted leading-relaxed max-w-lg">
-                    A modern educational platform designed to support educators with resources and rewards. Join the TBUCKS community today and start brewing success.
-                </p>
-<div class="flex flex-wrap gap-4 pt-4">
-<button class="h-12 px-8 bg-text-main text-white hover:bg-black font-bold rounded-lg transition-all transform hover:-translate-y-1 shadow-soft">
-                        Join Now
-                    </button>
-<button class="h-12 px-8 bg-white border border-border-light text-text-main hover:border-primary font-bold rounded-lg transition-all">
-                        Learn More
-                    </button>
-</div>
-<div class="flex items-center gap-4 mt-8 pt-8 border-t border-border-light/60">
-<div class="flex -space-x-3">
-<div class="w-10 h-10 rounded-full border-2 border-white bg-gray-200" data-alt="User avatar 1" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCiDRrDhzVPHtGKz-fCsaffIyvlB8epZluJY4qnI5zANfdOw-Ite4Ab_ATp2q5IC0NpbhCoTOMbfT1YFe7jLdbAu7X7LZ3uvdcocexyGMEmniEqGEDMeqmGuHQ-DqiE8KAbiWU_lRfPSQz7vsQ_pkrOlGERxttHUOfFyVXXIxFThhjhxGNlROGKovkOeom8akmgZavMg2Sf1II33BGhIbm9k4BoGqvY_DLX03dX17Y4kddbtVaT4MNfpDnVe4qrmV_yCorZ1M4Ekn4'); background-size: cover;"></div>
-<div class="w-10 h-10 rounded-full border-2 border-white bg-gray-300" data-alt="User avatar 2" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD_bGOcSNoijshwh50vbt_fphum1chlpHjWisgHn6vY6cMqryj7xcrEtRXbBC8j22MQRnYRzEu7o6Xl4Fjr32c4qZIdF6BJKTQKJuDvny2O0su3iZBkwNXCEhO62wUqa5XO2LcbKDPLwMXlRcUnqFoIzFdfHdwiBkhO56N6OydCTz8j8k5ZbbZIrKkVyJA_2OgKAf3Qtf0MCBSOIBF2Lf111LmrxjZ0QtedYJw7hfwdBeUz2NoVVdOTyQlxfe2nikYqDg8ZKbW1Hoo'); background-size: cover;"></div>
-<div class="w-10 h-10 rounded-full border-2 border-white bg-gray-400" data-alt="User avatar 3" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCvSBVde0gnKxzIeTT2YgD79fNPzjGeWENaeTL6PH7D3UxonlsS4Vv5bsRJsX0bVKvP0VpKfoOmfNFqQbqb6J0KksT--tnEJ8eFUF5NLiAWL89ZvxugZPIW2YMF1M3rj7CfG0yV3B9CmOe5eav-5c7LjefX43o5gGqAKjubtXbD6ZR0Kh_QDr11X9_nr7_8p6ouaIDXPiWj-U1t7mxMmbJ6Oe1UAZKkHHuqiXA7NLygy8tzUQF3LXeFw-5JiSvme62Ug9BnZMXZmkQ'); background-size: cover;"></div>
-<div class="w-10 h-10 rounded-full border-2 border-white bg-primary text-text-main flex items-center justify-center text-xs font-bold shadow-sm">
-                            +2k
-                        </div>
-</div>
-<span class="text-sm font-medium text-text-muted">Trusted by educators worldwide</span>
-</div>
-</div>
-<div class="relative h-full flex justify-center items-center min-h-[400px]">
-<!-- Abstract graphic background -->
-<div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent/10 rounded-2xl -rotate-3 transform scale-95"></div>
-<div class="absolute inset-0 bg-white border border-border-light rounded-2xl rotate-3 shadow-lg transform scale-95"></div>
-<!-- Floating Cup Icon -->
-<div class="relative z-10 floating-icon">
-<div class="w-48 h-48 md:w-64 md:h-64 bg-text-main rounded-3xl flex items-center justify-center shadow-2xl rotate-6 border-[6px] border-white">
-<div class="text-center">
-<span class="material-symbols-outlined text-[80px] md:text-[100px] text-white mb-2">local_cafe</span>
-<div class="text-accent text-4xl font-black">T</div>
-</div>
-<!-- Steam animation effect suggestion static -->
-<div class="absolute -top-12 left-1/2 -translate-x-1/2 flex gap-3 opacity-60">
-<div class="w-2 h-8 bg-gray-300 rounded-full blur-sm"></div>
-<div class="w-2 h-12 bg-gray-300 rounded-full blur-sm -mt-4"></div>
-<div class="w-2 h-6 bg-gray-300 rounded-full blur-sm"></div>
-</div>
-</div>
-<!-- Decorative Elements -->
-<div class="absolute -right-8 -bottom-8 bg-white p-4 rounded-xl shadow-lg border border-border-light flex items-center gap-3 animate-bounce" style="animation-duration: 3s;">
-<div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-<span class="material-symbols-outlined">verified</span>
-</div>
-<div>
-<p class="text-xs text-text-muted font-semibold">Status</p>
-<p class="text-sm font-bold text-text-main">Verified Teacher</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</header>
-<!-- Services Section -->
-<section class="border-b border-border-light bg-white py-20">
-<div class="max-w-[1280px] mx-auto px-6">
-<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-<div class="max-w-2xl">
-<h2 class="text-sm font-bold text-accent uppercase tracking-wider mb-2">Our Menu</h2>
-<h3 class="text-3xl md:text-4xl font-bold text-text-main tracking-tight">Brewing Success for Educators</h3>
-<p class="mt-4 text-text-muted text-lg max-w-xl">
-                        Our platform provides the essential ingredients for a thriving classroom environment, served fresh daily.
-                    </p>
-</div>
-<a class="group flex items-center gap-2 text-sm font-bold text-text-main hover:text-primary transition-colors" href="#">
-                    View Full Menu
-                    <span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
-</a>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-<!-- Card 1 -->
-<div class="hover-card-accent p-8 rounded-xl border border-border-light bg-white group cursor-pointer relative overflow-hidden">
-<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-<span class="material-symbols-outlined text-[120px] text-text-main">menu_book</span>
-</div>
-<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary-dark mb-6 group-hover:bg-primary group-hover:text-text-main transition-colors">
-<span class="material-symbols-outlined">menu_book</span>
-</div>
-<h4 class="text-xl font-bold text-text-main mb-3">Fresh Resources</h4>
-<p class="text-text-muted leading-relaxed">
-                        Access a constantly updated library of teaching materials curated by top educators.
-                    </p>
-</div>
-<!-- Card 2 -->
-<div class="hover-card-accent p-8 rounded-xl border border-border-light bg-white group cursor-pointer relative overflow-hidden">
-<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-<span class="material-symbols-outlined text-[120px] text-text-main">groups</span>
-</div>
-<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary-dark mb-6 group-hover:bg-primary group-hover:text-text-main transition-colors">
-<span class="material-symbols-outlined">groups</span>
-</div>
-<h4 class="text-xl font-bold text-text-main mb-3">Community Blend</h4>
-<p class="text-text-muted leading-relaxed">
-                        Connect with other educators in a relaxed, supportive network designed for collaboration.
-                    </p>
-</div>
-<!-- Card 3 -->
-<div class="hover-card-accent p-8 rounded-xl border border-border-light bg-white group cursor-pointer relative overflow-hidden">
-<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-<span class="material-symbols-outlined text-[120px] text-text-main">local_cafe</span>
-</div>
-<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary-dark mb-6 group-hover:bg-primary group-hover:text-text-main transition-colors">
-<span class="material-symbols-outlined">local_cafe</span>
-</div>
-<h4 class="text-xl font-bold text-text-main mb-3">Reward Perks</h4>
-<p class="text-text-muted leading-relaxed">
-                        Earn T-Bucks for contributions and redeem them for real value in our exclusive marketplace.
-                    </p>
-</div>
-</div>
-</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-logo">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="47" stroke="#006241" stroke-width="2.5" fill="none"/>
+      <circle cx="50" cy="50" r="40" stroke="#006241" stroke-width="1" fill="none" opacity="0.2"/>
+      <path d="M36 40 h28 l-3 26 a3 3 0 0 1-3 2.8 h-16 a3 3 0 0 1-3-2.8 Z" stroke="#006241" stroke-width="2" fill="none"/>
+      <path d="M64 46 c7 0 9 4 9 9 s-2 9 -9 9" stroke="#006241" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <path d="M44 36 c0-4 4-4 4-8" stroke="#006241" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.4"/>
+      <path d="M50 35 c0-4 4-4 4-8" stroke="#006241" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.4"/>
+      <path d="M56 36 c0-4 4-4 4-8" stroke="#006241" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.4"/>
+      <text x="50" y="60" text-anchor="middle" font-family="'DM Serif Display',serif" font-size="16" fill="#006241" font-weight="400">T</text>
+    </svg>
+  </div>
+  <h1>TBUCKS</h1>
+  <div class="hero-line"></div>
+  <p class="hero-tagline">선생님들의 편안한 디지털 아지트</p>
+  <p class="hero-desc">커피 한 잔의 여유처럼,<br>편하게 배우고, 나누고, 만들어가는 공간.</p>
+  <div class="hero-pills">
+    <span class="pill">강의</span>
+    <span class="pill">활동</span>
+    <span class="pill">트렌드</span>
+    <span class="pill">서비스</span>
+  </div>
+  <div class="hero-cta">
+    <a class="btn btn--green" href="#menu">둘러보기</a>
+  </div>
 </section>
-<!-- Archive Section -->
-<section class="py-20 bg-background-subtle">
-<div class="max-w-[1280px] mx-auto px-6">
-<div class="flex items-center justify-between mb-10 border-b border-border-light pb-4">
-<h3 class="text-2xl font-bold text-text-main">From the Archive</h3>
-<div class="flex gap-2">
-<button class="w-10 h-10 flex items-center justify-center rounded-full border border-border-light bg-white hover:bg-gray-50 transition-colors">
-<span class="material-symbols-outlined text-sm">arrow_back</span>
-</button>
-<button class="w-10 h-10 flex items-center justify-center rounded-full border border-border-light bg-white hover:bg-gray-50 transition-colors">
-<span class="material-symbols-outlined text-sm">arrow_forward</span>
-</button>
-</div>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-<!-- Article 1 -->
-<article class="group bg-white rounded-lg overflow-hidden border border-border-light hover:shadow-lg transition-all duration-300">
-<div class="h-48 overflow-hidden relative">
-<div class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2 py-1 rounded text-xs font-bold z-10">Math</div>
-<div class="w-full h-full bg-gray-200 transition-transform duration-500 group-hover:scale-105" data-alt="Abstract mathematics shapes" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBC4KjQTrUX7ZczmaJYFfa9-5tIzwCWLkv3113MQ9ZPLvuXFlKqVZVwSN08A9qUgnh5iuqa91-x_yMbEXC4UMbHCK3yFbiiGSSOZlg6XiMPXGqR4GqUUADj94PFkgVHmoh1f3xH94nr34cHGp5GF5MGhFywXKgrSSf-hnd1OVX5YaDFTKtX6QL70JAixSwLW9xUAudzS4xVRXKFmTf2Gj3XvrvzLpNP-8aZ7GqSfLhPcRVAK2t8FLoXalYGDOu_wrgGfTezsOXe6dY'); background-size: cover; background-position: center;"></div>
-</div>
-<div class="p-5">
-<div class="flex items-center gap-2 text-xs text-text-muted mb-2">
-<span class="material-symbols-outlined text-[14px]">calendar_today</span>
-<span>Oct 24, 2023</span>
-</div>
-<h4 class="text-lg font-bold text-text-main mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                            The Geometry of Coffee Cups
-                        </h4>
-<p class="text-sm text-text-muted line-clamp-3 mb-4">
-                            Exploring shapes and volumes in everyday objects to engage students in geometry lessons.
-                        </p>
-<a class="text-sm font-bold text-accent hover:underline decoration-2 underline-offset-4" href="#">Read Article</a>
-</div>
-</article>
-<!-- Article 2 -->
-<article class="group bg-white rounded-lg overflow-hidden border border-border-light hover:shadow-lg transition-all duration-300">
-<div class="h-48 overflow-hidden relative">
-<div class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2 py-1 rounded text-xs font-bold z-10">Science</div>
-<div class="w-full h-full bg-gray-200 transition-transform duration-500 group-hover:scale-105" data-alt="Microscope lens close up" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB1IILokzqhptYcXpw7flxmR-T6K1_lhbrCdtAP4I6CoFaAsNArkCTvoYvrRrSKKerSFg158Gx2duGBlPDJrSgciP6ZA4NHHfUFB_7kAIG11WQWKH7CRNfNS9BlhdamSXtUhrZFO429K846iUmudoCSYSblGrUoIdB6D4ngYOu-Ot9adfbBE2MVNKUF-Ku9JQLko-QG5bOnbJ3a_GKevKgOnXeyMBfFVg6NqDk7AIlQhuVsvC_jQTm5oXKSLfwWpzNIht8U1GD8fD0'); background-size: cover; background-position: center;"></div>
-</div>
-<div class="p-5">
-<div class="flex items-center gap-2 text-xs text-text-muted mb-2">
-<span class="material-symbols-outlined text-[14px]">calendar_today</span>
-<span>Nov 02, 2023</span>
-</div>
-<h4 class="text-lg font-bold text-text-main mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                            Photosynthesis &amp; Morning Brews
-                        </h4>
-<p class="text-sm text-text-muted line-clamp-3 mb-4">
-                            How plants process energy and how we can relate that to our daily caffeine intake.
-                        </p>
-<a class="text-sm font-bold text-accent hover:underline decoration-2 underline-offset-4" href="#">Read Article</a>
-</div>
-</article>
-<!-- Article 3 -->
-<article class="group bg-white rounded-lg overflow-hidden border border-border-light hover:shadow-lg transition-all duration-300">
-<div class="h-48 overflow-hidden relative">
-<div class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2 py-1 rounded text-xs font-bold z-10">History</div>
-<div class="w-full h-full bg-gray-200 transition-transform duration-500 group-hover:scale-105" data-alt="Ancient scroll texture" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCIVf3mvGMiPURyRgSx0rnckAw_VYAirrQQGcREye7HaWlC5eq2n8oJ6x8DuNXP6kojwVInfIuLWS9W9TnXDKHoY6H3Yj4xFIOwYOX3HPEWsCQYgVHtHWl-2_PmbuyIofUhnRqu3QdcyOgh82DEPaYNbcEy3wnTZYdepZeDRsjSfGfqPRUq7QIZPn3x6_-G6QGZzwvjxG4wdcMHaTpP7h_T4Pwzzsp6ux7v3_T_O27e724en1yOh9bj2a-brpDOKQKeXoJagWmIwOE'); background-size: cover; background-position: center;"></div>
-</div>
-<div class="p-5">
-<div class="flex items-center gap-2 text-xs text-text-muted mb-2">
-<span class="material-symbols-outlined text-[14px]">calendar_today</span>
-<span>Nov 15, 2023</span>
-</div>
-<h4 class="text-lg font-bold text-text-main mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                            The History of Trade Routes
-                        </h4>
-<p class="text-sm text-text-muted line-clamp-3 mb-4">
-                            Tracing the origins of spice and coffee trade to teach economic history effectively.
-                        </p>
-<a class="text-sm font-bold text-accent hover:underline decoration-2 underline-offset-4" href="#">Read Article</a>
-</div>
-</article>
-<!-- Article 4 -->
-<article class="group bg-white rounded-lg overflow-hidden border border-border-light hover:shadow-lg transition-all duration-300">
-<div class="h-48 overflow-hidden relative">
-<div class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2 py-1 rounded text-xs font-bold z-10">Wellness</div>
-<div class="w-full h-full bg-gray-200 transition-transform duration-500 group-hover:scale-105" data-alt="Serene nature landscape" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBBfFIfPRlvG9k8vTWCuJ0Av2TCi2L2CXY3whVKuIhRjVzQPRXd2hTGWAH9bOnciXEl7e_clA0k28Pw6uKsKSJM4u_efCkCkeNH2lw5wmnESlYaJ45PDuLu_tHZGMTnZdt_k1knGNorvlIEzx_1g4jf-DHZeMKN44MGdLuNWRJmez5dLUF3BQj9NglltT6NF020jxpi0n2tN3w_WClazBj9-VXAUAZ-IxLI5HUPAJ14mjdS3QRIo-VIW34dEO9p4wAB396c0UxWOBM'); background-size: cover; background-position: center;"></div>
-</div>
-<div class="p-5">
-<div class="flex items-center gap-2 text-xs text-text-muted mb-2">
-<span class="material-symbols-outlined text-[14px]">calendar_today</span>
-<span>Nov 28, 2023</span>
-</div>
-<h4 class="text-lg font-bold text-text-main mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                            Teacher Burnout Prevention
-                        </h4>
-<p class="text-sm text-text-muted line-clamp-3 mb-4">
-                            Strategies to keep your energy high and stress levels low throughout the semester.
-                        </p>
-<a class="text-sm font-bold text-accent hover:underline decoration-2 underline-offset-4" href="#">Read Article</a>
-</div>
-</article>
-</div>
-</div>
+
+<!-- MENU -->
+<section class="section-border" id="menu">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">What We Serve</div>
+      <h2 class="section-title">tbucks에서는 이런 걸 해요</h2>
+      <p class="section-desc">스타벅스에서 커피 한 잔 하며 편하게 이야기 나누듯, 여기서도 편하게 즐겨보세요.</p>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-card reveal">
+        <h3>📚 강의 & 클래스</h3>
+        <p>AI, 에듀테크, 실무 도구 활용법 등 선생님들에게 꼭 필요한 이야기를 나눕니다.</p>
+      </div>
+      <div class="menu-card reveal">
+        <h3>🎯 활동 & 프로젝트</h3>
+        <p>워크숍, 커뮤니티 참여, 발표 등 현재 진행형인 활동들을 모아둡니다.</p>
+      </div>
+      <div class="menu-card reveal">
+        <h3>⚡ 요즘 핫한 것들</h3>
+        <p>교육 트렌드, AI 도구, 유용한 리소스. 요즘 이야기를 큐레이션합니다.</p>
+      </div>
+      <div class="menu-card reveal">
+        <h3>🧩 서비스 & 도구</h3>
+        <p>선생님들의 일상을 조금 더 편하게, 수업을 조금 더 재밌게.</p>
+      </div>
+    </div>
+  </div>
 </section>
-<!-- Footer -->
-<footer class="bg-white border-t border-border-light pt-16 pb-8">
-<div class="max-w-[1280px] mx-auto px-6">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-<div class="col-span-1 md:col-span-1">
-<div class="flex items-center gap-2 mb-6">
-<div class="w-8 h-8 bg-text-main rounded-md flex items-center justify-center text-accent">
-<span class="material-symbols-outlined text-[18px]">local_cafe</span>
+
+<!-- PROJECTS -->
+<section class="section-border" id="projects">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Projects</div>
+      <h2 class="section-title">만든 것들</h2>
+      <p class="section-desc">tbucks.xyz 아래에서 살아가는 서비스들.</p>
+    </div>
+    <div class="project-list">
+      <a class="project-card reveal" href="#">
+        <div>
+          <div class="project-name">프로젝트 이름</div>
+          <div class="project-desc">프로젝트에 대한 한 줄 설명이 여기에 들어갑니다</div>
+        </div>
+        <span class="project-badge badge--wip">준비 중</span>
+      </a>
+      <a class="project-card reveal" href="#">
+        <div>
+          <div class="project-name">프로젝트 이름</div>
+          <div class="project-desc">프로젝트에 대한 한 줄 설명이 여기에 들어갑니다</div>
+        </div>
+        <span class="project-badge badge--soon">Soon</span>
+      </a>
+      <a class="project-card reveal" href="#">
+        <div>
+          <div class="project-name">프로젝트 이름</div>
+          <div class="project-desc">프로젝트에 대한 한 줄 설명이 여기에 들어갑니다</div>
+        </div>
+        <span class="project-badge badge--soon">Soon</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TRENDING -->
+<section class="section-border" id="trending">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">What's Hot</div>
+      <h2 class="section-title">요즘 핫한 것들</h2>
+      <p class="section-desc">알아두면 좋은 트렌드와 리소스를 큐레이션합니다.</p>
+    </div>
+    <div class="trending-list">
+      <a class="trending-item reveal" href="#">
+        <span class="trending-num">01</span>
+        <span class="trending-title">교실에서 바로 쓰는 AI 도구 TOP 5</span>
+        <span class="trending-cat">AI</span>
+      </a>
+      <a class="trending-item reveal" href="#">
+        <span class="trending-num">02</span>
+        <span class="trending-title">2025 에듀테크 트렌드 정리</span>
+        <span class="trending-cat">EDU</span>
+      </a>
+      <a class="trending-item reveal" href="#">
+        <span class="trending-num">03</span>
+        <span class="trending-title">선생님도 알면 좋은 노코드 툴</span>
+        <span class="trending-cat">TECH</span>
+      </a>
+      <a class="trending-item reveal" href="#">
+        <span class="trending-num">04</span>
+        <span class="trending-title">번아웃 없이 사이드 프로젝트 하는 법</span>
+        <span class="trending-cat">LIFE</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHIVE -->
+<section class="section-border" id="archive">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Archive</div>
+      <h2 class="section-title">기록들</h2>
+      <p class="section-desc">만들고, 배우고, 경험한 것들의 기록.</p>
+    </div>
+    <div class="archive-list">
+      <a class="archive-item reveal" href="#">
+        <span class="archive-date">2025.02</span>
+        <span class="archive-title">tbucks.xyz 랜딩 페이지를 만들었다</span>
+        <span class="archive-tag">LOG</span>
+      </a>
+      <a class="archive-item reveal" href="#">
+        <span class="archive-date">2025.02</span>
+        <span class="archive-title">첫 번째 서비스 기획기</span>
+        <span class="archive-tag">DEV</span>
+      </a>
+      <a class="archive-item reveal" href="#">
+        <span class="archive-date">2025.01</span>
+        <span class="archive-title">왜 개인 브랜드가 필요한가</span>
+        <span class="archive-tag">ESSAY</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- LINKS -->
+<section class="section-border" id="links">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Connect</div>
+      <h2 class="section-title">연결하기</h2>
+      <p class="section-desc" style="margin-bottom:2rem;"></p>
+    </div>
+    <div class="links-grid">
+      <a class="link-card reveal" href="#" target="_blank">
+        <span class="link-emoji">🐙</span>
+        <div class="link-name">GitHub</div>
+        <div class="link-handle">@tbucks</div>
+      </a>
+      <a class="link-card reveal" href="#" target="_blank">
+        <span class="link-emoji">📺</span>
+        <div class="link-name">YouTube</div>
+        <div class="link-handle">@tbucks</div>
+      </a>
+      <a class="link-card reveal" href="#" target="_blank">
+        <span class="link-emoji">📸</span>
+        <div class="link-name">Instagram</div>
+        <div class="link-handle">@tbucks</div>
+      </a>
+      <a class="link-card reveal" href="mailto:hello@tbucks.xyz">
+        <span class="link-emoji">✉️</span>
+        <div class="link-name">Email</div>
+        <div class="link-handle">hello@tbucks.xyz</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-line"></div>
+  <h2>커피 한 잔의 여유, 여기서 시작하세요</h2>
+  <p>새로운 강의, 서비스, 트렌드 소식을 놓치지 마세요.</p>
+  <a class="btn btn--outline" href="mailto:hello@tbucks.xyz">소식 받기 →</a>
 </div>
-<h2 class="text-lg font-extrabold tracking-tight">
-<span class="text-accent">T</span>BUCKS
-                        </h2>
-</div>
-<p class="text-text-muted text-sm leading-relaxed mb-6">
-                        Empowering educators with resources, community, and rewards. Because teaching should be rewarding.
-                    </p>
-<div class="flex gap-4">
-<a class="text-text-muted hover:text-text-main transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
-<a class="text-text-muted hover:text-text-main transition-colors" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
-<a class="text-text-muted hover:text-text-main transition-colors" href="#"><span class="material-symbols-outlined">rss_feed</span></a>
-</div>
-</div>
-<div>
-<h3 class="font-bold text-text-main mb-6">Platform</h3>
-<ul class="flex flex-col gap-3 text-sm text-text-muted">
-<li><a class="hover:text-primary transition-colors" href="#">Browse Resources</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Community Hub</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Reward Store</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Pricing</a></li>
-</ul>
-</div>
-<div>
-<h3 class="font-bold text-text-main mb-6">Company</h3>
-<ul class="flex flex-col gap-3 text-sm text-text-muted">
-<li><a class="hover:text-primary transition-colors" href="#">About Us</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Press</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Contact</a></li>
-</ul>
-</div>
-<div>
-<h3 class="font-bold text-text-main mb-6">Stay Updated</h3>
-<p class="text-sm text-text-muted mb-4">Subscribe to our newsletter for the latest resources.</p>
-<form class="flex flex-col gap-2">
-<input class="h-10 px-4 rounded-lg bg-background-subtle border border-border-light focus:outline-none focus:border-primary text-sm w-full" placeholder="Enter your email" type="email"/>
-<button class="h-10 px-4 bg-text-main text-white font-bold rounded-lg text-sm hover:bg-black transition-colors" type="button">Subscribe</button>
-</form>
-</div>
-</div>
-<div class="border-t border-border-light pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-text-muted">
-<p>© 2023 TBUCKS Education Inc. All rights reserved.</p>
-<div class="flex gap-6">
-<a class="hover:text-text-main" href="#">Privacy Policy</a>
-<a class="hover:text-text-main" href="#">Terms of Service</a>
-<a class="hover:text-text-main" href="#">Cookie Settings</a>
-</div>
-</div>
-</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <span class="brand">TBUCKS</span></p>
 </footer>
-</body></html>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 50);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const sectionIds = ['menu','projects','trending','archive','links'];
+  const navLinks = document.querySelectorAll('nav ul > li > a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sectionIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && scrollY >= el.offsetTop - 120) current = id;
+    });
+    navLinks.forEach(a => {
+      const isActive = a.getAttribute('href') === '#' + current;
+      if (isActive) {
+        a.style.color = 'var(--green)';
+        a.classList.add('nav-active');
+      } else {
+        a.style.color = '';
+        a.classList.remove('nav-active');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
