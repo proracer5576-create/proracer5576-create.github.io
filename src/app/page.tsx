@@ -139,11 +139,11 @@ export default function Home() {
             <div className="max-w-2xl">
               <h2 className="text-sm font-bold text-brand-t uppercase tracking-wider mb-2">What We Serve</h2>
               <h3 className="text-3xl md:text-4xl font-bold text-text-main tracking-tight">
-                <span className="text-brand-t">T</span>
+                <span className="text-brand-t font-black">T</span>
                 <span className="text-brand-bucks font-extrabold" style={{fontFamily: "'Inter', sans-serif"}}>bucks</span>
                 에서는 이런 걸 해요
               </h3>
-              <p className="mt-4 text-text-muted text-lg max-w-xl break-keep">
+              <p className="mt-4 text-text-muted text-lg whitespace-nowrap">
                 스타벅스에서 커피를 마시며 편하게 이야기 나누듯, 여기서도 편하게 즐겨보세요!
               </p>
             </div>
